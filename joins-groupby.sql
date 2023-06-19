@@ -153,3 +153,29 @@ SUM(fsp.Amount)
 FROM
 	FactStrategyPlan fsp
 	JOIN DimDate dd ON dd.Datekey = fsp.Datekey GROUP BY CalendarYear 
+
+
+SELECT
+	ProductSubcategoryName,
+	COUNT(*)
+FROM
+	DimProduct dp
+JOIN DimProductSubcategory dps ON
+	dps.ProductSubcategoryKey = dp.ProductSubcategoryKey
+WHERE
+	dp.BrandName = 'Contoso'
+	AND dp.ColorName = 'Silver'
+GROUP BY ProductSubcategoryName
+
+
+
+
+SELECT
+dps.ProductSubcategoryName,
+dp.BrandName,
+COUNT(*)
+FROM
+	DimProduct dp
+JOIN DimProductSubcategory dps ON
+	dps.ProductSubcategoryKey = dp.ProductSubcategoryKey
+GROUP BY dps.ProductSubcategoryName, dp.BrandNam
