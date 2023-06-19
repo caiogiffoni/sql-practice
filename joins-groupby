@@ -124,3 +124,32 @@ GROUP BY
 	dc.Gender
 
 
+	SELECT
+	CurrencyDescription ,
+	AVG(fer.AverageRate)
+FROM
+	FactExchangeRate fer
+JOIN DimCurrency dc ON
+	dc.CurrencyKey = fer.CurrencyKey
+GROUP BY
+	CurrencyDescription 
+	HAVING AVG(fer.AverageRate) > 10 AND AVG(fer.AverageRate) < 100
+
+	
+	SELECT
+	ScenarioDescription ,
+	SUM(fsp.Amount)
+FROM
+	FactStrategyPlan fsp
+JOIN DimScenario ds ON
+	ds.ScenarioKey = fsp.ScenarioKey
+WHERE ds.ScenarioDescription IN ('Actual', 'Budget')
+GROUP BY
+	ds.ScenarioDescription
+
+SELECT
+CalendarYear ,
+SUM(fsp.Amount)
+FROM
+	FactStrategyPlan fsp
+	JOIN DimDate dd ON dd.Datekey = fsp.Datekey GROUP BY CalendarYear 
