@@ -16,3 +16,20 @@ BEGIN
 END
 
 
+
+CREATE TABLE Calendatio(Date DATE)
+
+select * from Calendatio 
+
+
+
+DECLARE @day DATETIME = '2021-01-01'
+SELECT FORMAT(DATEADD(DAY, 1, @day),  'dd/MM/yyyy')
+PRINT 'START'
+WHILE @day <= '2021-12-31'
+BEGIN
+	INSERT INTO Calendatio (Date) VALUES (@day)
+	PRINT FORMAT(DATEADD(DAY, 1, @day), 'd', 'pt-BR' )
+	SET @day = DATEADD(DAY, 1, @day)
+END
+
